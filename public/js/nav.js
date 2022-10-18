@@ -2,17 +2,17 @@ const navbar = document.querySelector('.navbar')
 
 
 window.addEventListener('scroll', () => {
-  console.log('scroll', scrollY);
-  if(scrollY => 180){ 
-    navbar.classList.add('bg')
-  }else{
-    navbar.classList.remove('bg')
-  }
+    console.log('scroll', scrollY);
+    if (scrollY => 180) {
+        navbar.classList.add('bg')
+    } else {
+        navbar.classList.remove('bg')
+    }
 })
 
 const createNavbar = () => {
-  navbar.innerHTML += 
-  `
+    navbar.innerHTML +=
+        `
     <ul class="links-container">
 
       <li class="link-item">
@@ -57,7 +57,7 @@ const createNavbar = () => {
 
         <div class="user-icon-popup">
           <p>Login to your acount</p>
-          <p>Login</p>
+          <a>Login</a>
         </div>
 
       </div>
@@ -74,28 +74,28 @@ let userIcon = document.querySelector('.user-icon')
 let userPopupIcon = document.querySelector('.user-icon-popup')
 
 userIcon.addEventListener('click', () => {
-  userPopupIcon.classList.toggle('active')
+    userPopupIcon.classList.toggle('active')
 })
 
 let text = userPopupIcon.querySelector('p')
 let actionBtn = userPopupIcon.querySelector('a')
-let user = JSON.parse(sessionStorage.user || null )
+let user = JSON.parse(sessionStorage.user || null)
 
-if(user != null){
-  text.innerHTML = `log in as, ${user.name}`
-  actionBtn.innerHTML= 'Logout'
-  actionBtn.addEventListener('click', () => {
-    logout()
-  })
+if (user != null) {
+    text.innerHTML = `log in as, ${user.name}`
+    actionBtn.innerHTML = 'Logout'
+    actionBtn.addEventListener('click', () => {
+        logout()
+    })
 } else {
-  text.innerHTML = `log in to your account`
-  actionBtn.innerHTML= 'Login'
-  actionBtn.addEventListener('click', () => {
-    location.href('/login')
-  })
+    text.innerHTML = `log in to your account`
+    actionBtn.innerHTML = 'Login'
+    actionBtn.addEventListener('click', () => {
+        location.href('/login')
+    })
 }
 
 const logout = () => {
-  sessionStorage.clear()
-  location.reload()
+    sessionStorage.clear()
+    location.reload()
 }
