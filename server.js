@@ -1,8 +1,8 @@
 import express from 'express';
-import bcrypt from 'bcrypt';
+import bcrypt, { compare } from 'bcrypt';
 import stripe from 'stripe';
 import { initializeApp } from 'firebase/app';
-import { getDoc, getFirestore } from 'firebase/firestore'
+import { collection, getDoc, getFirestore, setDoc } from 'firebase/firestore'
 
 
 //Configuracion de Firebase
@@ -45,6 +45,45 @@ app.get('/singup', (req, res) => {
 app.post('/singup', (req, res) => {
     const { name, email, password, number, tac } = req.body
 
+    //Ruta login
+    app.get('/login', (req, res) => {
+        res.sendFile('login.html', { root: 'public' })
+    })
+
+    app.post('/login', (req, res) => {
+        const { email, password } = req.body
+
+        if (!email.length || !password.length) {
+            return res.json({
+                'alert': 'fill al the inputs'
+            })
+        }
+        const users = collection(db, 'users')
+        getDoc(doc(users, email))
+            .then(user => {
+                if (!user.exists()) {
+                    return res.json({
+                        'alert': 'user doesnt exist'
+                    })
+                } else {
+                    bcrypt.compare(password, user.data().password, (err, result) => {
+                        if (result) {
+                            let data = user.data()
+                            return res.json({
+                                name: data.name,
+                                email: data.email,
+                                seller: data.seller
+                            })
+                        } else {
+                            return res.json({ 'alert': 'password incorrect' })
+                        }
+                    })
+                }
+            })
+    })
+
+
+
     // Validaciones
     if (name.length < 3) {
         res.json({ 'alert': 'name must be have 3 letters long' })
@@ -64,6 +103,18 @@ app.post('/singup', (req, res) => {
                 res.json({ 'alert': 'email already exist' })
             } else {
                 //encriptar password
+
+                bcrypt.genSalt(10, (err, hash) => {
+                    req.body.password = hash
+                    req.body.seller = false
+                    setDoc(doc(users, email), req.body).then(data => {
+                        res.json({
+                            name: req.body.name,
+                            emal: req.body.email,
+                            seller: req.body.seller
+                        })
+                    })
+                })
             }
         })
     }
