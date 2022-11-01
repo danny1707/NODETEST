@@ -2,7 +2,7 @@ import express from 'express';
 import bcrypt, { compare } from 'bcrypt';
 import stripe from 'stripe';
 import { initializeApp } from 'firebase/app';
-import { collection, getDoc, getFirestore, setDoc } from 'firebase/firestore'
+import { getFirestore, doc, collection, getDoc, getFirestore, setDoc, getDoc } from 'firebase/firestore'
 
 
 //Configuracion de Firebase
