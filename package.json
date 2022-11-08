@@ -1,22 +1,22 @@
 {
-  "name": "nodeproject",
+  "name": "superproyecto",
   "version": "1.0.0",
-  "type":"module",
-  "description": "This is a project with node",
+  "description": "",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "start": "nodemon server.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/DevxJuanHdz/nodeProject.git"
+    "url": "git+https://github.com/MarcoARamirezS/superProyecto.git"
   },
-  "author": "Juan Antonio Hernandez Aldaco",
+  "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/DevxJuanHdz/nodeProject/issues"
+    "url": "https://github.com/MarcoARamirezS/superProyecto/issues"
   },
-  "homepage": "https://github.com/DevxJuanHdz/nodeProject#readme",
+  "homepage": "https://github.com/MarcoARamirezS/superProyecto#readme",
   "dependencies": {
     "bcrypt": "^5.0.1",
     "dotenv": "^16.0.3",

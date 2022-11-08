@@ -1,12 +1,12 @@
-//collage
+// collage
 
-const collageImages = [...document.querySelectorAll('.collage-img')]
+const collageImages = [ ...document.querySelectorAll('.collage-img') ]
 
 collageImages.map((item, i) => {
     item.addEventListener('mouseover', () => {
         collageImages.map((imagen, index) => {
             if (index !== i) {
-                imagen.style.filter = 'blur(10px)'
+                imagen.style.filter = `blur(10px)`
                 item.style.zIndex = 2
             }
         })
